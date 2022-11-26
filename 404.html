@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" class="motion-safe:scroll-smooth 2xl:text-[20px]">
+	<head>
+		<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Error 404 — AstroWind</title>
+<meta name="robots" content="index,follow" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="og:title" content="Error 404 — AstroWind" />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="https://astrowind.vercel.app/assets/default.c6e14b88_Z2eFO6P.png" />
+<meta property="og:image:alt" content="Error 404 — AstroWind" />
+
+
+<!-- Or Google Fonts -->
+
+<!-- Google Site Verification -->
+<meta name="google-site-verification" content="orcPxI47GSa-cRvY11tUe6iGg2IO_RPvnA1q95iEM3M">
+
+<!-- Google Analytics -->
+
+
+
+
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="mask-icon" href="/favicon.svg" color="#8D46E7">
+
+	<link rel="stylesheet" href="/assets/_...page_.05b05838.css" /></head>
+
+	<body class="antialiased text-gray-900 dark:text-slate-300 tracking-tight bg-white dark:bg-slate-900">
+		<section class="flex items-center h-full p-16">
+	<div class="container flex flex-col items-center justify-center px-5 mx-auto my-8">
+		<div class="max-w-md text-center">
+			<h2 class="mb-8 font-bold text-9xl">
+				<span class="sr-only">Error</span>
+				<span class="bg-clip-text text-transparent bg-gradient-to-r from-primary-500 to-secondary-500">404</span>
+			</h2>
+			<p class="text-3xl font-semibold md:text-3xl">Sorry, we couldn't find this page.</p>
+			<p class="mt-4 mb-8 text-lg text-gray-600 dark:text-slate-400">
+				But dont worry, you can find plenty of other things on our homepage.
+			</p>
+			<a rel="noopener noreferrer" href="/" class="btn ml-4">Back to homepage</a>
+		</div>
+	</div>
+</section>
+		<script>
+	// Set "light" theme as default
+	// if (!localStorage.theme) {
+	//   localStorage.theme = "light";
+	// }
+
+	if (
+		localStorage.theme === 'dark' ||
+		(!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+	) {
+		document.documentElement.classList.add('dark');
+	} else {
+		document.documentElement.classList.remove('dark');
+	}
+
+	function attachEvent(selector, event, fn) {
+		const matches = document.querySelectorAll(selector);
+		if (matches && matches.length) {
+			matches.forEach((elem) => {
+				elem.addEventListener(event, () => fn(elem), false);
+			});
+		}
+	}
+
+	window.onload = function () {
+		attachEvent('[data-aw-toggle-menu]', 'click', function (elem) {
+			elem.classList.toggle('expanded');
+			document.body.classList.toggle('overflow-hidden');
+			document.getElementById('header')?.classList.toggle('h-screen');
+			document.querySelector('#header nav')?.classList.toggle('hidden');
+		});
+
+		attachEvent('[data-aw-toggle-color-scheme]', 'click', function () {
+			document.documentElement.classList.toggle('dark');
+			localStorage.theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+		});
+
+		attachEvent('[data-aw-social-share]', 'click', function (elem) {
+			const network = elem.getAttribute('data-aw-social-share');
+			const url = encodeURIComponent(elem.getAttribute('data-aw-url'));
+			const text = encodeURIComponent(elem.getAttribute('data-aw-text'));
+
+			let href;
+			switch (network) {
+				case 'facebook':
+					href = `https://www.facebook.com/sharer.php?u=${url}`;
+					break;
+				case 'twitter':
+					href = `https://twitter.com/intent/tweet?url=${url}&text=${text}`;
+					break;
+				case 'linkedin':
+					href = `https://www.linkedin.com/shareArticle?mini=true&url=${url}&title=${text}`;
+					break;
+				case 'whatsapp':
+					href = `https://wa.me/?text=${text}%20${url}`;
+					break;
+				case 'mail':
+					href = `mailto:?subject=%22${text}%22&body=${text}%20${url}`;
+					break;
+
+				default:
+					return;
+			}
+
+			const newlink = document.createElement('a');
+			newlink.target = '_blank';
+			newlink.href = href;
+			newlink.click();
+		});
+	};
+	window.onpageshow = function () {
+		const elem = document.querySelector('[data-aw-toggle-menu]');
+		if (elem) {
+			elem.classList.remove('expanded');
+		}
+		document.body.classList.remove('overflow-hidden');
+		document.getElementById('header')?.classList.remove('h-screen');
+		document.querySelector('#header nav')?.classList.add('hidden');
+	};
+</script>
+
+		
+	</body>
+</html>
