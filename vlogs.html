@@ -59,12 +59,19 @@
 								<select id="select1" onchange="generateInputs()">
 								<option value="" disabled selected>Kies een waarde</option>
 								<!-- Hier worden de waarden vanuit het tekstbestand ingelezen -->
-								<?php 
+								<!-- <?php 
 									$values = file('pad/naar/waardelijst1.txt', FILE_IGNORE_NEW_LINES);
 									foreach($values as $value){
 									echo '<option value="'.strtolower($value).'">'.$value.'</option>';
 									}
-								?>
+								?> -->
+								<?php 
+									$values = file('categories/maincategories.txt', FILE_IGNORE_NEW_LINES);
+									foreach($values as $value){
+									echo '<option value="'.strtolower($value).'">'.$value.'</option>';
+									}
+								?> 
+								<?php echo json_encode(file($filename, FILE_IGNORE_NEW_LINES)); ?>;
 								</select>
 								<div id="input-container">
 								<!-- Hier worden de invoervelden dynamisch gegenereerd -->
