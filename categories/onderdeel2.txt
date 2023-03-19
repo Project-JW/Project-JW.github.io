@@ -1,0 +1,3 @@
+Waarde1
+Waarde2
+Grootte

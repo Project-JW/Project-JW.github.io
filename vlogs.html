@@ -52,11 +52,19 @@
 				<!-- Main -->
 					<div id="main">
 						<div class="inner">
-							<h1>Start NU!</h1>
+							<h1>Selecteer Categorie</h1>
 							<span class="image main"><img src="images/pic13.jpg" alt="" /></span>
-							<p>Onze missie is jou te helpen met besparen van Energie, kosten en daarmee uiteindelijk natuurlijk ook de natuur.</p>
-							<p>Wij doen dit door het bieden van Tips, Truuks, Informatie in de vorm van Blog en Vlog artikelen, maar uiteindelijk willen wij ook gadgets aanbieden die het mogelijk maken om daarmee nog efficienter om te kunnen gaan met Energie.</p>
-							<p>Hou onze website in de gaten zodat je altijd op de hoogte bent van de laatste ontwikkelingen!</p>
+							<form>
+								<label for="select1">Selectie 1:</label>
+								<select id="select1" onchange="updateSelect2()">
+								  <option value="">--Kies een optie--</option>
+								</select>
+								<br>
+								<label for="select2">Selectie 2:</label>
+								<select id="select2">
+								  <option value="">--Selectie 1 eerst maken--</option>
+								</select>
+							  </form>
 						</div>
 					</div>
 
@@ -109,6 +117,51 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
-
+			<script>
+				const select1 = document.getElementById("select1");
+				const select2 = document.getElementById("select2");
+		  
+				// Haal de inhoud van het bestand op en gebruik deze als opties voor select1
+				fetch("waardeslijst1.txt")
+				  .then(response => response.text())
+				  .then(text => {
+					const options = text.trim().split("\n");
+					options.forEach(option => {
+					  const opt = document.createElement("option");
+					  opt.value = option;
+					  opt.textContent = option;
+					  select1.appendChild(opt);
+					});
+				  });
+		  
+				function updateSelect2() {
+				  // Verwijder alle bestaande opties uit select2
+				  while (select2.firstChild) {
+					select2.removeChild(select2.firstChild);
+				  }
+		  
+				  // Als er een optie is geselecteerd in select1, laad de opties vanuit het bijbehorende bestand in select2
+				  const selectedOption = select1.value;
+				  if (selectedOption) {
+					fetch(`${selectedOption}.txt`)
+					  .then(response => response.text())
+					  .then(text => {
+						const options = text.trim().split("\n");
+						options.forEach(option => {
+						  const opt = document.createElement("option");
+						  opt.value = option;
+						  opt.textContent = option;
+						  select2.appendChild(opt);
+						});
+					  });
+				  } else {
+					// Als er geen optie is geselecteerd in select1, voeg een standaardoptie toe aan select2
+					const opt = document.createElement("option");
+					opt.value = "";
+					opt.textContent = "--Selectie 1 eerst maken--";
+					select2.appendChild(opt);
+				  }
+				}
+			  </script>
 	</body>
 </html>
