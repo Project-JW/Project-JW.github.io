@@ -187,13 +187,7 @@
 						inputContainer.appendChild(input);
 						inputContainer.appendChild(document.createElement("br"));
 					}
-				  } else {
-					// Als er geen optie is geselecteerd in select1, voeg een standaardoptie toe aan select2
-					const opt = document.createElement("option");
-					opt.value = "";
-					opt.textContent = "--Selectie 1 eerst maken--";
-					select2.appendChild(opt);
-				  }
+				  } 
 				}
 				function generateInputs() {
 				  // Lees de waarde uit select1
