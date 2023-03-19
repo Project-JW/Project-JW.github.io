@@ -55,15 +55,21 @@
 							<h1>Selecteer Categorie</h1>
 							<span class="image main"><img src="images/pic13.jpg" alt="" /></span>
 							<form>
-								<label for="select1">Selecteer Bouwblok:</label>
-								<select id="select1" onchange="updateSelect2()">
-								  <option value="">--Kies bouwblok--</option>
+								<label for="select1">Selectie 1:</label>
+								<select id="select1" onchange="generateInputs()">
+								<option value="" disabled selected>Kies een waarde</option>
+								<!-- Hier worden de waarden vanuit het tekstbestand ingelezen -->
+								<?php 
+									$values = file('pad/naar/waardelijst1.txt', FILE_IGNORE_NEW_LINES);
+									foreach($values as $value){
+									echo '<option value="'.strtolower($value).'">'.$value.'</option>';
+									}
+								?>
 								</select>
-								<br>
-								<label for="select2">Vul nu de volgende waarden in:</label>
-								<select id="select2">
-								  <option value="">--Selectie 1 eerst maken--</option>
-								</select>
+								<div id="input-container">
+								<!-- Hier worden de invoervelden dynamisch gegenereerd -->
+								</div>
+								<input type="submit" value="Verstuur">
 							  </form>
 						</div>
 					</div>
@@ -141,19 +147,40 @@
 				  }
 		  
 				  // Als er een optie is geselecteerd in select1, laad de opties vanuit het bijbehorende bestand in select2
-				  const selectedOption = select1.value;
+				  const selectedOption = select1.value;			  
+				  
 				  if (selectedOption) {
-					fetch(`categories/${selectedOption}.txt`.toLowerCase())
-					  .then(response => response.text())
-					  .then(text => {
-						const options = text.trim().split("\n");
-						options.forEach(option => {
-						  const opt = document.createElement("option");
-						  opt.value = option;
-						  opt.textContent = option;
-						  select2.appendChild(opt);
-						});
-					  });
+					var filename = "categories/" + selectedOption + ".txt".toLowerCase();
+					var values = <?php echo json_encode(file($filename, FILE_IGNORE_NEW_LINES)); ?>;
+					//fetch(filename)
+					//  .then(response => response.text())
+					//  .then(text => {
+					//	const options = text.trim().split("\n");
+					//	options.forEach(option => {
+					//	  const opt = document.createElement("option");
+					//	  opt.value = option;
+					//	  opt.textContent = option;
+					//	  select2.appendChild(opt);
+					//	});
+					//  });
+					// Maak een container voor de invoervelden
+					var inputContainer = document.getElementById("input-container");
+					inputContainer.innerHTML = "";
+					
+					// Maak invoervelden voor iedere waarde
+					for (var i = 0; i < values.length; i++) {
+						var label = document.createElement("label");
+						label.innerHTML = values[i] + ": ";
+						
+						var input = document.createElement("input");
+						input.type = "text";
+						input.name = select1Value + "_" + values[i];
+						input.required = true;
+						
+						inputContainer.appendChild(label);
+						inputContainer.appendChild(input);
+						inputContainer.appendChild(document.createElement("br"));
+					}
 				  } else {
 					// Als er geen optie is geselecteerd in select1, voeg een standaardoptie toe aan select2
 					const opt = document.createElement("option");
@@ -162,6 +189,33 @@
 					select2.appendChild(opt);
 				  }
 				}
-			  </script>
+				function generateInputs() {
+				  // Lees de waarde uit select1
+				  var select1Value = document.getElementById("select1").value;
+				  
+				  // Haal de waarden op uit het bijbehorende bestand
+				  var filename = "categories/" + select1Value + ".txt";
+				  var values = <?php echo json_encode(file($filename, FILE_IGNORE_NEW_LINES)); ?>;
+				  
+				  // Maak een container voor de invoervelden
+				  var inputContainer = document.getElementById("input-container");
+				  inputContainer.innerHTML = "";
+				  
+				  // Maak invoervelden voor iedere waarde
+				  for (var i = 0; i < values.length; i++) {
+					var label = document.createElement("label");
+					label.innerHTML = values[i] + ": ";
+					
+					var input = document.createElement("input");
+					input.type = "text";
+					input.name = select1Value + "_" + values[i];
+					input.required = true;
+					
+					inputContainer.appendChild(label);
+					inputContainer.appendChild(input);
+					inputContainer.appendChild(document.createElement("br"));
+				  }
+				}
+			  </script>			  			  
 	</body>
 </html>
