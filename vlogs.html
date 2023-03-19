@@ -143,7 +143,7 @@
 				  // Als er een optie is geselecteerd in select1, laad de opties vanuit het bijbehorende bestand in select2
 				  const selectedOption = select1.value;
 				  if (selectedOption) {
-					fetch(`${selectedOption}.txt`)
+					fetch(`categories/${selectedOption}.txt`)
 					  .then(response => response.text())
 					  .then(text => {
 						const options = text.trim().split("\n");
