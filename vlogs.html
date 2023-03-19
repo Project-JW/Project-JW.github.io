@@ -129,7 +129,7 @@
 					var select1Value = document.getElementById("select1").value;
 					
 					// Haal de waarden op uit het bijbehorende bestand
-					var filename = "pad/naar/" + select1Value + ".txt";
+					var filename = ("categories/" + select1Value + ".txt").toLowerCase();
 					var values = <?php echo json_encode(file($filename, FILE_IGNORE_NEW_LINES)); ?>;
 					
 					// Maak een container voor de invoervelden
