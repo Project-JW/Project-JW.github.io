@@ -57,7 +57,7 @@
 							<form>
 								<label for="select1">Selectie 1:</label>
 								<select id="select1" onchange="generateInputs()">
-								<option value="" disabled selected>Kies een waarde</option>
+									<option value="" disabled selected>Kies een waarde</option>
 								<!-- Hier worden de waarden vanuit het tekstbestand ingelezen -->
 								<!-- <?php 
 									$values = file('pad/naar/waardelijst1.txt', FILE_IGNORE_NEW_LINES);
@@ -131,7 +131,7 @@
 			<script src="assets/js/main.js"></script>
 			<script>
 				const select1 = document.getElementById("select1");
-				const select2 = document.getElementById("select2");
+				//const select2 = document.getElementById("select2");
 		  
 				// Haal de inhoud van het bestand op en gebruik deze als opties voor select1
 				fetch("categories/maincategories.txt")
@@ -194,7 +194,7 @@
 				  var select1Value = document.getElementById("select1").value;
 				  
 				  // Haal de waarden op uit het bijbehorende bestand
-				  var filename = "categories/" + select1Value + ".txt";
+				  var filename = "categories/" + select1Value + ".txt".toLowerCase();
 				  var values = <?php echo json_encode(file($filename, FILE_IGNORE_NEW_LINES)); ?>;
 				  
 				  // Maak een container voor de invoervelden
