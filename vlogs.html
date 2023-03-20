@@ -56,15 +56,8 @@
 							<span class="image main"><img src="images/pic13.jpg" alt="" /></span>
 							<form>
 								<label for="select1">Selectie 1:</label>
-								<select id="select1" onchange="generateInputs()">
-								  <option value="" disabled selected>Kies een waarde</option>
-								  <!-- Hier worden de waarden vanuit het tekstbestand ingelezen -->
-								  <?php 
-									$values = file('categories/maincategories.txt', FILE_IGNORE_NEW_LINES);
-									foreach($values as $value){
-									  echo '<option value="'.strtolower($value).'">'.$value.'</option>';
-									}
-								  ?>
+								<select id="select1" onchange="updateSelect2()">
+									<option value="">--Kies een optie--</option>
 								</select>
 								<div id="input-container">
 								  <!-- Hier worden de invoervelden dynamisch gegenereerd -->
